@@ -1,3 +1,5 @@
+import java.util.List;
+import java.util.ArrayList;
 public class USACO {
   public static int[][] open(String file) {
     File f = new File(t);
@@ -8,14 +10,14 @@ public class USACO {
     String s = "";
     for (int x = 0; x < in.length(); x++) {
       if (in.charAt(x) == ' ') {
-        ans.add(s);
+        ans.add(Integer.parseInt(s));
         s = "";
       }
       else {
         s += in.charAt(x);
       }
     }
-    ans.add(s);
+    ans.add(Integer.parseInt(s));
     return ans;
   }
 }
