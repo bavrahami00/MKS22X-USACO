@@ -9,6 +9,14 @@ public class USACO {
       }
       System.out.println();
     }
+    System.out.println();
+    board = stomp(board,1,4,4);
+    for (int x = 0; x < board.length; x++) {
+      for (int i = 0; i < board[x].length; i++) {
+        System.out.print(board[x][i]+",");
+      }
+      System.out.println();
+    }
   }
   public static int[][] open(String file) {
     try {
@@ -48,7 +56,18 @@ public class USACO {
     }
     return re;
   }
-  public static int[][] stomp (int[][] board) {
-    
+  public static int[][] stomp (int[][] board, int row, int col, int depth) {
+    int top = board[row][col];
+    for (int x = row-1; x < row+2; x++) {
+      for (int i = col-1; i < col+2; i++) {
+        top = Math.max(top,board[x][i]);
+      }
+    }
+    for (int x = row-1; x < row+2; x++) {
+      for (int i = col-1; i < col+2; i++) {
+        board[x][i] = Math.min(board[x][i],top-depth);
+      }
+    }
+    return board;
   }
 }
