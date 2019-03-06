@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 public class USACO {
   public static void main(String[] args) {
-    int[][] board = open("in.txt");
+    /*int[][] board = open("in.txt");
     for (int x = 0; x < board.length; x++) {
       for (int i = 0; i < board[x].length; i++) {
         System.out.print(board[x][i]+",");
@@ -10,13 +10,44 @@ public class USACO {
       System.out.println();
     }
     System.out.println();
-    board = stomp(board,1,4,4);
+    board = stomp(board,1,1,10);
     for (int x = 0; x < board.length; x++) {
       for (int i = 0; i < board[x].length; i++) {
         System.out.print(board[x][i]+",");
       }
       System.out.println();
     }
+    System.out.println(count(board,22));*/
+    System.out.println(bronze("in.txt"));
+  }
+  public static int bronze(String filename) {
+    try {
+      int[][] board = open(filename);
+      File f = new File(filename);
+      Scanner s = new Scanner(f);
+      String t = s.nextLine();
+      int count = 0;
+      int[] line;
+      while (s.hasNext()) {
+        if (count < board.length) {
+          t = s.nextLine();
+          count++;
+        }
+        else {
+          t = s.nextLine();
+          line = convert(t);
+          board = stomp(board,line[0],line[1],line[2]);
+        }
+      }
+      s = new Scanner(filename);
+      t = s.nextLine();
+      int deep = Integer.parseInt(convert(t)[2]);
+      return count(board,deep);
+    }
+    catch (FileNotFoundException e) {
+      System.out.println("File not found");
+    }
+    return 0;
   }
   public static int[][] open(String file) {
     try {
@@ -69,5 +100,14 @@ public class USACO {
       }
     }
     return board;
+  }
+  public static int count(int[][] board, int depth) {
+    int ans = 0;
+    for (int x = 0; x < board.length; x++) {
+      for (int i = 0; i < board[x].length; i++) {
+        ans += Math.max(0,depth-board[x][i]);
+      }
+    }
+    return ans*72*72;
   }
 }
