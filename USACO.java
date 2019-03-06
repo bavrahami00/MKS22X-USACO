@@ -1,25 +1,6 @@
 import java.util.*;
 import java.io.*;
 public class USACO {
-  public static void main(String[] args) {
-    /*int[][] board = open("in.txt");
-    for (int x = 0; x < board.length; x++) {
-      for (int i = 0; i < board[x].length; i++) {
-        System.out.print(board[x][i]+",");
-      }
-      System.out.println();
-    }
-    System.out.println();
-    board = stomp(board,1,1,10);
-    for (int x = 0; x < board.length; x++) {
-      for (int i = 0; i < board[x].length; i++) {
-        System.out.print(board[x][i]+",");
-      }
-      System.out.println();
-    }
-    System.out.println(count(board,22));*/
-    System.out.println(bronze("in.txt"));
-  }
   public static int bronze(String filename) {
     try {
       int[][] board = open(filename);
@@ -39,9 +20,9 @@ public class USACO {
           board = stomp(board,line[0],line[1],line[2]);
         }
       }
-      s = new Scanner(filename);
+      s = new Scanner(f);
       t = s.nextLine();
-      int deep = Integer.parseInt(convert(t)[2]);
+      int deep = convert(t)[2];
       return count(board,deep);
     }
     catch (FileNotFoundException e) {
