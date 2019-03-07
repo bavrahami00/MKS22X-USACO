@@ -12,6 +12,17 @@ public class Silver {
     int time = length("in.txt");
     System.out.println(time);
   }
+  public static int count(char[][] field, int time) {
+    int[][] prev = new int[field.length][field[0].length];
+    int[][] now = new int[field.length][field[0].length];
+    for (int x = 0; x < field.length; x++) {
+      for (int i = 0; i < field.length; i++) {
+        if (field[x][i] == 'S') {
+          prev[x][i] = 1;
+        }
+      }
+    }
+  }
   public static int length(String filename) {
     try {
       File f = new File(filename);
