@@ -9,6 +9,19 @@ public class Silver {
       }
       System.out.println();
     }
+    int time = length("in.txt");
+    System.out.println(time);
+  }
+  public static int length(String filename) {
+    try {
+      File f = new File(filename);
+      Scanner s = new Scanner(f);
+      return convert(s.nextLine())[2];
+    }
+    catch (FileNotFoundException e) {
+      System.out.println("File not found");
+    }
+    return 0;
   }
   public static char[][] start(String filename) {
     try {
@@ -25,6 +38,9 @@ public class Silver {
         }
         count++;
       }
+      size = convert(s.nextLine());
+      ans[size[0]-1][size[1]-1] = 'S';
+      ans[size[2]-1][size[3]-1] = 'E';
       return ans;
     }
     catch (FileNotFoundException e) {
