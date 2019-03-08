@@ -1,16 +1,8 @@
 import java.util.*;
 import java.io.*;
 public class Silver {
-  public static void main(String[] args) {
-    char[][] field = start("in.txt");
-    for (int x = 0; x < field.length; x++) {
-      for (int i = 0; i < field[x].length; i++) {
-        System.out.print(field[x][i]);
-      }
-      System.out.println();
-    }
-    int time = length("in.txt");
-    System.out.println(time);
+  public static int silver(String filename) {
+    return count(start(filename),length(filename));
   }
   public static int count(char[][] field, int time) {
     int[][] prev = new int[field.length][field[0].length];
@@ -22,6 +14,44 @@ public class Silver {
         }
       }
     }
+    int t = 0;
+    while (t < time) {
+      for (int x = 0; x < field.length; x++) {
+        for (int i = 0; i < field[x].length; i++) {
+          if (field[x][i] != '*') {
+            int path = 0;
+            try {
+              path += prev[x-1][i];
+            }
+            catch (ArrayIndexOutOfBoundsException a) {}
+            try {
+              path += prev[x+1][i];
+            }
+            catch (ArrayIndexOutOfBoundsException a) {}
+            try {
+              path += prev[x][i-1];
+            }
+            catch (ArrayIndexOutOfBoundsException a) {}
+            try {
+              path += prev[x][i+1];
+            }
+            catch (ArrayIndexOutOfBoundsException a) {}
+            now[x][i] = path;
+          }
+        }
+      }
+      prev = now;
+      now = new int[field.length][field[0].length];
+      t++;
+    }
+    for (int x = 0; x < field.length; x++) {
+      for (int i = 0; i < field[x].length; i++) {
+        if (field[x][i] == 'E') {
+          return prev[x][i];
+        }
+      }
+    }
+    return -1;
   }
   public static int length(String filename) {
     try {
